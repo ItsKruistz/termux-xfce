@@ -23,7 +23,7 @@ echo -e "${BOLDGREEN}
 ${ENDCOLOR}"
 sleep 1
 apt install unstable-repo x11-repo -y
-apt install --no-install-recommends xfce4-session xfce4-panel xfdesktop4 xfwm4 xfce4-terminal thunar xfce4-settings -y
+apt install xfce4-session xfce4-panel xfdesktop4 xfwm4 xfce4-terminal thunar xfce4-settings -y
 clear
 sleep 1
 echo -e "${BOLDGREEN}
@@ -77,7 +77,7 @@ echo -e "${BOLDGREEN}
  • The installation of the desktop is done!
 ${ENDCOLOR}"
 sleep 1
-echo Made by NotteShock with help of other resources on the Internet! | lolcat
+echo Made by NotteShock with help of other resources on the Internet!
 sleep 1
 echo -e "${BOLDRED}
  • To start the desktop please type "start", to stop please type "stop" (optional because the start script will stop all desktop sessions by itself)
