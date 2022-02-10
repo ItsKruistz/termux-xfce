@@ -1,0 +1,100 @@
+#!/bin/bash
+
+RED="31"
+GREEN="32"
+BOLDGREEN="\e[1;${GREEN}m"
+BOLDRED="\e[1;${RED}m"
+ENDCOLOR="\e[0m"
+
+## Ask the user if the user want to install the desktop or not
+
+cd
+clear
+read -p "Do you want to install the desktop? [y/n] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+sleep 1
+    echo "
+You choose to install the desktop"
+sleep 1
+echo -e "${BOLDGREEN}
+ • Installing the Xfce desktop.
+${ENDCOLOR}"
+sleep 1
+apt install unstable-repo x11-repo -y
+apt install --no-install-recommends xfce4-session xfce4-panel xfdesktop4 xfwm4 xfce4-terminal thunar xfce4-settings -y
+clear
+sleep 1
+echo -e "${BOLDGREEN}
+ • Creating shared directories.
+${ENDCOLOR}"
+mkdir $HOME/Desktop
+mkdir $HOME/Downloads 
+mkdir $HOME/Templates
+mkdir $HOME/Public
+mkdir $HOME/Documents
+mkdir $HOME/Pictures
+mkdir $HOME/Videos
+ln -s $HOME/storage/music Music
+clear
+echo -e "${BOLDGREEN}
+ • Downloading and installing configs.
+${ENDCOLOR}"
+wget https://raw.githubusercontent.com/thanksandnubbo/material-termux-desktop/main/.pam_environment
+mkdir .config
+cd ~/.config/
+wget -L https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/user-dirs.dirs
+chmod +x user-dirs.dirs
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/configs.tar.gz
+tar -xf configs.tar.gz -C ~/.config/
+rm -rf configs.tar.gz
+cd $HOME
+mkdir .vnc
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/xstartup
+mv ~/xstartup ~/.vnc/xstartup
+chmod +x ~/.vnc/xstartup
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/passwd
+mv ~/passwd ~/.vnc/passwd
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/forest-mountains-animals-minimalism-sunrise-atmosphere.png
+mv ~/forest-mountains-animals-minimalism-sunrise-atmosphere.png ~/Pictures/forest-mountains-animals-minimalism-sunrise-atmosphere.png
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/orchis-theme-wallpaper.jpg
+mv ~/orchis-theme-wallpaper.jpg ~/Pictures/orchis-theme-wallpaper.jpg
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/.bashrc
+chmod +x *
+termux-reload-settings
+mv ~/start $PREFIX/bin/start
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/start
+ln -s ~/start $PREFIX/bin/start
+chmod +x ~/start
+mv ~/stop $PREFIX/bin/stop
+wget https://raw.githubusercontent.com/NotteShock/material-termux-desktop/main/stop
+ln -s ~/stop $PREFIX/bin/stop
+chmod +x ~/stop
+clear
+sleep 1
+echo -e "${BOLDGREEN}
+ • The installation of the desktop is done!
+${ENDCOLOR}"
+sleep 1
+echo Made by NotteShock with help of other resources on the Internet! | lolcat
+sleep 1
+echo -e "${BOLDRED}
+ • To start the desktop please type "start", to stop please type "stop" (optional because the start script will stop all desktop sessions by itself)
+${ENDCOLOR}"
+sleep 1
+start
+## Remove installation files.
+rm -rf ./install themes.tar.gz install-materia-kde.sh termuxproperties.tar.gz iconsandcursors.tar.gz
+elif [[ $REPLY =~ ^[Nn]$ ]]
+then
+sleep 1
+    echo "
+You don't want to install the desktop 😔
+"
+else
+sleep 1
+    echo "
+Your response is invaild! 😑
+"
+fi
