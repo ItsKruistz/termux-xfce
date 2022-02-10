@@ -22,8 +22,7 @@ echo -e "${BOLDGREEN}
  • Installing the Xfce desktop.
 ${ENDCOLOR}"
 sleep 1
-apt install unstable-repo x11-repo -y
-apt install xfce4-session xfce4-panel xfdesktop4 xfwm4 xfce4-terminal thunar xfce4-settings -y
+apt install unstable-repo x11-repo xfce4-session xfce4-panel xfdesktop4 xfwm4 xfce4-terminal thunar xfce4-settings -y
 clear
 sleep 1
 echo -e "${BOLDGREEN}
